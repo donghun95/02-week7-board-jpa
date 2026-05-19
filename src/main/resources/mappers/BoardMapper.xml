@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dsa.week5board.board.mapper.BoardMapper">
+
+    <insert id="insert" parameterType="Board" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO board (title, content, writer)
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+    <select id="findById" resultType="Board">
+        SELECT id, title, content, writer, views, created_at
+        FROM board
+        WHERE id = #{id}
+    </select>
+
+    <select id="search" parameterType="com.dsa.week5board.board.dto.BoardSearchRequest" resultType="Board">
+        SELECT id, title, content, writer, views, created_at
+        FROM board
+        <where>
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+            <if test="writer != null and writer != ''">
+                AND writer = #{writer}
+            </if>
+            <if test="fromDate != null">
+                AND created_at &gt;= #{fromDate}
+            </if>
+            <if test="toDate != null">
+                AND created_at &lt; DATE_ADD(#{toDate}, INTERVAL 1 DAY)
+            </if>
+        </where>
+        ORDER BY id DESC
+        LIMIT 20
+    </select>
+
+    <select id="findOffsetPage" resultType="Board">
+        SELECT id, title, content, writer, views, created_at
+        FROM board
+        ORDER BY id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="findCursorPage" resultType="Board">
+        SELECT id, title, content, writer, views, created_at
+        FROM board
+        <where>
+            <if test="cursor != null">
+                AND id &lt; #{cursor}
+            </if>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{limit}
+    </select>
+
+    <update id="increaseViews">
+        UPDATE board
+        SET views = views + 1
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM board WHERE id = #{id}
+    </delete>
+
+    <select id="findByIds" resultType="Board">
+        SELECT id, title, content, writer, views, created_at
+        FROM board
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY id DESC
+    </select>
+
+</mapper>

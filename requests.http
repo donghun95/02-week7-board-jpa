@@ -1,0 +1,30 @@
+### 단건 조회
+GET http://localhost:18080/api/boards/1
+
+### 동적 검색: 제목 + 작성자
+GET http://localhost:18080/api/boards/search?title=Cursor&writer=donghun
+
+### foreach: 여러 id를 IN 절로 조회
+GET http://localhost:18080/api/boards/bulk?ids=1&ids=3&ids=5
+
+### Offset 페이징
+GET http://localhost:18080/api/boards/offset?page=0&size=3
+
+### Cursor 페이징 첫 페이지
+GET http://localhost:18080/api/boards/cursor?size=3
+
+### Cursor 페이징 다음 페이지
+GET http://localhost:18080/api/boards/cursor?cursor=3&size=3
+
+### 조회수 증가
+POST http://localhost:18080/api/boards/1/views
+
+### 게시글 등록
+POST http://localhost:18080/api/boards
+Content-Type: application/json
+
+{
+  "title": "수업 중 등록한 글",
+  "content": "Spring Boot + MyBatis 5주차 시연",
+  "writer": "mentor"
+}
