@@ -1,5 +1,6 @@
 package com.dsa.week5board.board.mapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public interface BoardMapper {
 
     List<Board> findOffsetPage(@Param("limit") int limit, @Param("offset") int offset);
 
-    List<Board> findCursorPage(@Param("cursor") Long cursor, @Param("limit") int limit);
+    List<Board> findCursorPage(@Param("createdAt") LocalDateTime createdAt, @Param("cursor") Long cursor, @Param("limit") int limit);
 
     void increaseViews(@Param("id") Long id);
 

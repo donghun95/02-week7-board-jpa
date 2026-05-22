@@ -47,11 +47,17 @@
         SELECT id, title, content, writer, views, created_at
         FROM board
         <where>
-            <if test="cursor != null">
+            <if test="cursor != null and createdAt == null">
                 AND id &lt; #{cursor}
             </if>
+            <if test="createdAt != null and cursor != null">
+                AND (
+                created_at &lt; #{createdAt}
+                OR (created_at = #{createdAt} AND id &lt; #{cursor})
+                )
+            </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY created_at DESC, id DESC
         LIMIT #{limit}
     </select>
 

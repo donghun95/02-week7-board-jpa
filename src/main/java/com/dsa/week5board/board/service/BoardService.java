@@ -1,5 +1,6 @@
 package com.dsa.week5board.board.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -55,11 +56,11 @@ public class BoardService {
                 .toList();
     }
 
-    public CursorResponse<BoardResponse> findCursorPage(Long cursor, int size) {
+    public CursorResponse<BoardResponse> findCursorPage(LocalDateTime createdAt, Long cursor, int size) {
         int normalizedSize = normalizeSize(size);
         int limitPlusOne = normalizedSize + 1;
 
-        List<Board> rows = boardMapper.findCursorPage(cursor, limitPlusOne);
+        List<Board> rows = boardMapper.findCursorPage(createdAt, cursor, limitPlusOne);
 
         boolean hasNext = rows.size() > normalizedSize;
         List<Board> pageItems = hasNext ? rows.subList(0, normalizedSize) : rows;

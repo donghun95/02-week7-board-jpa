@@ -1,5 +1,6 @@
 package com.dsa.week5board.board.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -62,9 +63,10 @@ public class BoardController {
     @GetMapping("/cursor")
     public ResponseEntity<CursorResponse<BoardResponse>> cursorPage(
             @RequestParam(required = false) Long cursor,
-            @RequestParam(defaultValue = "10") int size
-    ) {
-        return ResponseEntity.ok(boardService.findCursorPage(cursor, size));
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) LocalDateTime createdAt
+            ) {
+        return ResponseEntity.ok(boardService.findCursorPage(createdAt,cursor, size));
     }
 
     @PostMapping("/{id}/views")
