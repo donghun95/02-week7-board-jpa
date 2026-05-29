@@ -24,9 +24,9 @@ POST http://localhost:18080/api/boards
 Content-Type: application/json
 
 {
-  "title": "REST 리팩토링",
+  "title": "REST 리팩토링33333",
   "content": "6주차 시연-1",
-  "writer": "donghun3"
+  "writer": "donghun3444"
 }
 
 ### 게시글 삭제: 위 등록 응답의 id 값으로 실행

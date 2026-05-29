@@ -3,15 +3,12 @@ package com.dsa.week5board.board.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.dsa.week5board.board.dto.*;
 import com.dsa.week5board.board.exception.BoardNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dsa.week5board.board.domain.Board;
-import com.dsa.week5board.board.dto.BoardCreateRequest;
-import com.dsa.week5board.board.dto.BoardResponse;
-import com.dsa.week5board.board.dto.BoardSearchRequest;
-import com.dsa.week5board.board.dto.CursorResponse;
 import com.dsa.week5board.board.mapper.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -36,12 +33,12 @@ public class BoardService {
     }
 
     @Transactional
-    public BoardResponse update(BoardCreateRequest request){
+    public BoardResponse update(Long id,BoardUpdateRequest request){
         Board board = Board.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
                 .writer(request.getWriter())
-                .id(request.getId())
+                .id(id)
                 .build();
         boardMapper.update(board);
         return findById(board.getId());

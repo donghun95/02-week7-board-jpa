@@ -4,6 +4,7 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.dsa.week5board.board.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -16,10 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.dsa.week5board.board.dto.BoardCreateRequest;
-import com.dsa.week5board.board.dto.BoardResponse;
-import com.dsa.week5board.board.dto.BoardSearchRequest;
-import com.dsa.week5board.board.dto.CursorResponse;
 import com.dsa.week5board.board.service.BoardService;
 
 import jakarta.validation.Valid;
@@ -36,7 +33,7 @@ public class BoardController {
     @Operation(summary = "게시글 등록", description = "게시글을 생성하고 생성된 리소스 URI를 Location 헤더로 반환합니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "게시글 생성 성공"),
-            @ApiResponse(responseCode = "401", description = " 입력값 검증 실패", content = @Content)
+            @ApiResponse(responseCode = "400", description = "입력값 검증 실패", content = @Content)
     })
 
     @PostMapping
@@ -46,11 +43,17 @@ public class BoardController {
         return ResponseEntity.created(location).body(response);
     }
 
+    @Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "게시글 수정 성공"),
+            @ApiResponse(responseCode = "400", description = "입력값 검증 실패", content = @Content)
+    })
 
-    @PutMapping
-    public ResponseEntity<BoardResponse> put(@Valid @RequestBody BoardCreateRequest request) {
 
-        return  ResponseEntity.ok(boardService.update(request));
+    @PutMapping("/{id}")
+    public ResponseEntity<BoardResponse> put(@PathVariable Long id,@RequestBody BoardUpdateRequest request) {
+        BoardResponse response = boardService.update(id,request);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "게시글 단건 조회")

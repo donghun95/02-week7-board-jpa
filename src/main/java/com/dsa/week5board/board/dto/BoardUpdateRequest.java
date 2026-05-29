@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BoardCreateRequest {
+public class BoardUpdateRequest {
 
     @NotBlank
     @Size(max = 200)
@@ -22,4 +22,5 @@ public class BoardCreateRequest {
     @NotBlank
     @Size(max = 50)
     private String writer;
+
 }
