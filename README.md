@@ -1,111 +1,237 @@
-1.리펙토리 전/후 URL 비교표  
+1.
+N+1 발생케이스
 
- URL 구조 4원칙  
- 
-URL에 동사를 넣지 않는다. 동작은 HTTP 메서드가 표현/  
-컬렉션은 복수형 (board X, boards O)/  
-계층 구조는 리소스 관계로/  
-검색·필터는 qurey string
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=76;
+2026-06-06T08:36:52.574+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612574 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=75;
+2026-06-06T08:36:52.574+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612574 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=74;
+2026-06-06T08:36:52.574+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612574 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=73;
+2026-06-06T08:36:52.574+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612574 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=72;
+2026-06-06T08:36:52.575+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612575 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=71;
+2026-06-06T08:36:52.575+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612575 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=70;
+2026-06-06T08:36:52.576+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612576 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=69;
+2026-06-06T08:36:52.576+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612576 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=68;
+2026-06-06T08:36:52.576+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612576 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=67;
+2026-06-06T08:36:52.576+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612576 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=66;
+2026-06-06T08:36:52.577+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612577 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=65;
+2026-06-06T08:36:52.577+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612577 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=64;
+2026-06-06T08:36:52.577+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612577 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=63;
+2026-06-06T08:36:52.578+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612578 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=62;
+2026-06-06T08:36:52.578+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612578 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=61;
+2026-06-06T08:36:52.578+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612578 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=60;
+2026-06-06T08:36:52.578+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612578 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=59;
+2026-06-06T08:36:52.579+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612579 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=58;
+2026-06-06T08:36:52.579+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612579 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=57;
+2026-06-06T08:36:52.579+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612579 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=56;
+2026-06-06T08:36:52.580+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612579 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=55;
+2026-06-06T08:36:52.580+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612580 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=54;
+2026-06-06T08:36:52.581+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612581 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=53;
+2026-06-06T08:36:52.581+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612581 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=52;
+2026-06-06T08:36:52.582+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612582 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=51;
+2026-06-06T08:36:52.582+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612582 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=50;
+2026-06-06T08:36:52.582+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612582 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=49;
+2026-06-06T08:36:52.583+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612583 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=48;
+2026-06-06T08:36:52.583+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612583 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=47;
+2026-06-06T08:36:52.583+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612583 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=46;
+2026-06-06T08:36:52.584+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612584 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=45;
+2026-06-06T08:36:52.584+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612584 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=44;
+2026-06-06T08:36:52.584+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612584 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=43;
+2026-06-06T08:36:52.584+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612584 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=42;
+2026-06-06T08:36:52.585+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612585 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=41;
+2026-06-06T08:36:52.585+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612585 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=40;
+2026-06-06T08:36:52.585+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612585 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=39;
+2026-06-06T08:36:52.586+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612586 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=38;
+2026-06-06T08:36:52.586+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612586 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=37;
+2026-06-06T08:36:52.586+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612586 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=36;
+2026-06-06T08:36:52.586+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612586 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=35;
+2026-06-06T08:36:52.587+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612587 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=34;
+2026-06-06T08:36:52.587+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612587 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=33;
+2026-06-06T08:36:52.588+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612588 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=32;
+2026-06-06T08:36:52.588+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612588 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=31;
+2026-06-06T08:36:52.589+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612589 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=30;
+2026-06-06T08:36:52.589+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612589 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=29;
+2026-06-06T08:36:52.589+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612589 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=28;
+2026-06-06T08:36:52.590+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612590 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=27;
+2026-06-06T08:36:52.590+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612590 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=26;
+2026-06-06T08:36:52.590+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612590 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=25;
+2026-06-06T08:36:52.591+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612591 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=24;
+2026-06-06T08:36:52.591+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612591 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=23;
+2026-06-06T08:36:52.591+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612591 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=22;
+2026-06-06T08:36:52.591+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612591 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=21;
+2026-06-06T08:36:52.592+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612592 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=20;
+2026-06-06T08:36:52.592+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612592 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=19;
+2026-06-06T08:36:52.592+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612592 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=18;
+2026-06-06T08:36:52.592+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612592 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=17;
+2026-06-06T08:36:52.593+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612593 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=16;
+2026-06-06T08:36:52.593+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612593 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=15;
+2026-06-06T08:36:52.593+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612593 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=14;
+2026-06-06T08:36:52.593+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612593 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=13;
+2026-06-06T08:36:52.594+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612594 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=12;
+2026-06-06T08:36:52.594+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612594 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=11;
+2026-06-06T08:36:52.594+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612594 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=10;
+2026-06-06T08:36:52.595+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612595 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=9;
+2026-06-06T08:36:52.595+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612595 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=8;
+2026-06-06T08:36:52.595+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612595 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=7;
+2026-06-06T08:36:52.595+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612595 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=5;
+2026-06-06T08:36:52.602+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612602 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=4;
+2026-06-06T08:36:52.603+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612603 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=3;
+2026-06-06T08:36:52.604+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612604 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=2;
+2026-06-06T08:36:52.605+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612605 | took 0ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=?
+select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=1;
+2026-06-06T08:36:52.611+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612611 | took 0ms | commit | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
 
-리펙토리 전 
+;
+2.
+Fetch join 해결케이스
 
-### 동적 검색: 제목 + 작성자
-GET http://localhost:18080/api/boards/search?title=Cursor&writer=donghun
-
-### foreach: 여러 id를 IN 절로 조회
-GET http://localhost:18080/api/boards/bulk?ids=1&ids=3&ids=5
-
-### Offset 페이징
-GET http://localhost:18080/api/boards/offset?page=0&size=3
-
-### Cursor 페이징 첫 페이지
-GET http://localhost:18080/api/boards/cursor?size=3
-
-### Cursor 페이징 다음 페이지
-GET http://localhost:18080/api/boards/cursor?cursor=3&size=3
-
-### 조회수 증가
-POST http://localhost:18080/api/boards/1/views
-
-### 게시글 등록
-POST http://localhost:18080/api/boards
-Content-Type: application/json
-
-{
-  "title": "수업 중 등록한 글",
-  "content": "Spring Boot + MyBatis 5주차 시연",
-  "writer": "mentor"
-}
-
-리펙토리 후
-
-### 6주차 RESTful: 목록 조회 + 복합 Cursor 첫 페이지
-GET http://localhost:18080/api/boards?size=2
-
-### 6주차 RESTful: 복합 Cursor 다음 페이지
-GET http://localhost:18080/api/boards?cursorId=4&cursorCreatedAt=2026-05-21T10:17:25&size=2
-
-페이징 방식이 들어나지 않게 통합했습니다.
-
-### 6주차 RESTful: 검색 조건도 같은 컬렉션 조회 API로 처리
-GET http://localhost:18080/api/boards?title=Cursor&writer=donghun
-
-search는 동사. 단순필터는 컬렉션 qurerystring으로 하여야 합니다.
-
-### 6주차 RESTful: 여러 id 조회도 같은 컬렉션 조회 API로 처리
-GET http://localhost:18080/api/boards?ids=1&ids=3&ids=5
-
-bulk도 동작을 의미하며 여러 id조회는 컬렉션 필터로 하여야 합니다.
-
-### 조회수 증가: PATCH 방식
-PATCH http://localhost:18080/api/boards/1/views
-
-views 일부 상태 수 정이므로 PATCH가 의미상 정확합니다.
-
-### 게시글 등록: 201 Created + Location 헤더 확인
-POST http://localhost:18080/api/boards
-Content-Type: application/json
-
-{
-  "title": "REST 리팩토링",
-  "content": "6주차 시연",
-  "writer": "donghun"
-}
-POST 성공 시 Location  헤더 추가하고 생성 API의 표준 응답입니다.
-
-
-2. 상태 코드 정리
-<img width="972" height="598" alt="image" src="https://github.com/user-attachments/assets/b86289b4-b418-43dd-8ca7-074b76e84c6e" />
-
-3. 에러 응답 예시
-   
-   404 에러 응답
-   
-<img width="674" height="467" alt="image" src="https://github.com/user-attachments/assets/10d95154-eaed-42a2-bb74-0e990670f17a" />
-
-   
-   400 에러 응답
-   
-<img width="741" height="351" alt="image" src="https://github.com/user-attachments/assets/78fb7d3a-7167-4fc6-8866-bd5e31a62dbd" />
-
-
-4.복합 Cursor 페이징에서 id와 createdAt 이 둘 다 필요한 이유
-
-응답에 nextCursorId와 nextCursroCreatedAt을 같이 내려야 합니다.   
-id만 내려주면 클라이언트가 마지막 item에서 createdAt을 직접 꺼내야 해서 불친절합니다.
-
-
-5.HTTP 메서드 PUT 메서드 추가하기
-
-PUT 메서드는 전체를 교체 하는데 만약 내용이 없다면 null 값으로 대체 될수도 있다.
-테스트를 위해 dto에 BoardCreateRequest에 content 컬럼에  @NotBlank 설정을 지우고
-여기서 @NotBlank 설정은 string을 위한것이며 공백이나 글자 수가 0일 때를 체크한다.
-또 한걸음 더 나아가서 mariadb 테이블에 null 값을 허용해준다.
-이래야 지정 안해준 값이 null 로 덮혀지는 것을 확인해 볼 수있다.
-
-
-   
-
-
-
-
+2026-06-06T08:39:05.252+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-5] p6spy                                    : #1780702745251 | took 2034ms | statement | connection 3| url jdbc:mariadb://localhost/week5_board?user=root&password=***
+select distinct b1_0.id,c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer,b1_0.content,b1_0.created_at,b1_0.title,b1_0.views,b1_0.writer from board b1_0 left join comments c1_0 on b1_0.id=c1_0.board_id order by b1_0.id desc
+select distinct b1_0.id,c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer,b1_0.content,b1_0.created_at,b1_0.title,b1_0.views,b1_0.writer from board b1_0 left join comments c1_0 on b1_0.id=c1_0.board_id order by b1_0.id desc;
+2026-06-06T08:39:07.849+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-5] p6spy  
