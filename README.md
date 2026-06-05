@@ -227,8 +227,8 @@ select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comme
 select c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.writer from comments c1_0 where c1_0.board_id=1;
 2026-06-06T08:36:52.611+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-1] p6spy                                    : #1780702612611 | took 0ms | commit | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
 
-;
-2.
+;  
+2.  
 Fetch join 해결케이스
 
 2026-06-06T08:39:05.252+09:00  INFO 36360 --- [week7-board-jpa] [io-18080-exec-5] p6spy                                    : #1780702745251 | took 2034ms | statement | connection 3| url jdbc:mariadb://localhost/week5_board?user=root&password=***
