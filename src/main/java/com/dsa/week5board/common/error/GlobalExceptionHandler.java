@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -30,41 +29,41 @@ public class GlobalExceptionHandler {
                 .message(ex.getMessage())
                 .path(extractPath(request))
                 .build();
-        return ResponseEntity.status(code.getStatus()).body(body);
 
+        return ResponseEntity.status(code.getStatus()).body(body);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(
             MethodArgumentNotValidException ex,
             WebRequest request
-    ){
+    ) {
         List<ErrorResponse.FieldError> fieldErrors = ex.getBindingResult()
                 .getFieldErrors().stream()
                 .map(fe -> ErrorResponse.FieldError.builder()
-                                .field(fe.getField())
-                                .rejectedValue(fe.getRejectedValue())
-                                .message(fe.getDefaultMessage())
-                                .build())
+                        .field(fe.getField())
+                        .rejectedValue(fe.getRejectedValue())
+                        .message(fe.getDefaultMessage())
+                        .build())
                 .toList();
-                ErrorResponse body = ErrorResponse.builder()
-                        .timestamp(LocalDateTime.now())
-                        .status(ErrorCode.INVALID_INPUT.getStatus().value())
-                        .code(ErrorCode.INVALID_INPUT.getCode())
-                        .message(ErrorCode.INVALID_INPUT.getDefaultMessage())
-                        .path(extractPath(request))
-                        .fieldErrors(fieldErrors)
-                        .build();
-                return ResponseEntity.badRequest().body(body);
 
+        ErrorResponse body = ErrorResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(ErrorCode.INVALID_INPUT.getStatus().value())
+                .code(ErrorCode.INVALID_INPUT.getCode())
+                .message(ErrorCode.INVALID_INPUT.getDefaultMessage())
+                .path(extractPath(request))
+                .fieldErrors(fieldErrors)
+                .build();
+
+        return ResponseEntity.badRequest().body(body);
     }
 
     @ExceptionHandler({
             MethodArgumentTypeMismatchException.class,
             HttpMessageNotReadableException.class
     })
-
-    public ResponseEntity<ErrorResponse> handleBadRequest(Exception ex, WebRequest request){
+    public ResponseEntity<ErrorResponse> handleBadRequest(Exception ex, WebRequest request) {
         ErrorResponse body = ErrorResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(ErrorCode.INVALID_INPUT.getStatus().value())
@@ -72,11 +71,12 @@ public class GlobalExceptionHandler {
                 .message(ErrorCode.INVALID_INPUT.getDefaultMessage())
                 .path(extractPath(request))
                 .build();
-        return  ResponseEntity.badRequest().body(body);
+
+        return ResponseEntity.badRequest().body(body);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleAll(Exception ex, WebRequest request){
+    public ResponseEntity<ErrorResponse> handleAll(Exception ex, WebRequest request) {
         log.error("Unhandled exception", ex);
 
         ErrorResponse body = ErrorResponse.builder()
@@ -86,12 +86,11 @@ public class GlobalExceptionHandler {
                 .message(ErrorCode.INTERNAL_ERROR.getDefaultMessage())
                 .path(extractPath(request))
                 .build();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
 
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
 
-    private  String extractPath(WebRequest request) {
+    private String extractPath(WebRequest request) {
         return request.getDescription(false).replace("uri=", "");
     }
-
 }

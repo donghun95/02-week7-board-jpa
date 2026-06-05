@@ -1,51 +1,42 @@
-### 6주차 RESTful: 목록 조회 + 복합 Cursor 첫 페이지
-GET http://localhost:18080/api/boards?size=2
+### JPA: 게시글 + 댓글 단건 조회 (Fetch Join)
+GET http://localhost:18080/api/boards/1/with-comments
 
-### 6주차 RESTful: 복합 Cursor 다음 페이지
-# 먼저 위 요청(GET /api/boards?size=2)을 실행한 뒤,
-# 응답의 nextCursorId, nextCursorCreatedAt 값으로 아래 값을 교체해서 실행
-# createdAt은 DB 초기화 시점에 따라 달라집니다.
-# 예: GET http://localhost:18080/api/boards?cursorId=4&cursorCreatedAt=2026-05-21T10:17:25&size=2
+### JPA: 모든 게시글 + 댓글 - N+1 발생 (의도적)
+GET http://localhost:18080/api/boards?lazy=true
 
-### 6주차 RESTful: 검색 조건도 같은 컬렉션 조회 API로 처리
-GET http://localhost:18080/api/boards?title=Cursor&writer=donghun
+### JPA: 모든 게시글 + 댓글 - Fetch Join으로 해결
+GET http://localhost:18080/api/boards?fetch=join
 
-### 6주차 RESTful: 여러 id 조회도 같은 컬렉션 조회 API로 처리
-GET http://localhost:18080/api/boards?ids=1&ids=3&ids=5
-
-### 단건 조회
-GET http://localhost:18080/api/boards/1
-
-### 조회수 증가: PATCH 방식
-PATCH http://localhost:18080/api/boards/1/views
-
-### 게시글 등록: 201 Created + Location 헤더 확인
+### JPA: 게시글 등록
 POST http://localhost:18080/api/boards
 Content-Type: application/json
 
 {
-  "title": "REST 리팩토링33333",
-  "content": "6주차 시연-1",
-  "writer": "donghun3444"
+  "title": "JPA 등록 테스트",
+  "content": "Repository save()로 등록합니다.",
+  "writer": "donghun"
 }
 
-### 게시글 삭제: 위 등록 응답의 id 값으로 실행
-DELETE http://localhost:18080/api/boards/6
+### JPA: 단건 조회
+GET http://localhost:18080/api/boards/1
+
+### JPA: Dirty Checking 제목 수정
+PATCH http://localhost:18080/api/boards/1/title
+Content-Type: application/json
+c
+{
+  "title": "JPA Dirty Checking 시연"
+}
+
+### JPA: 게시글 삭제
+# 먼저 JPA 게시글 등록 요청을 실행한 뒤, 응답의 id 값으로 아래 숫자를 교체해서 실행
+# DELETE http://localhost:18080/api/boards/6
 
 ### 에러 처리: 없는 게시글은 404
-GET http://localhost:18080/api/boards/6
-
-### 에러 처리: 없는 게시글 삭제도 404
-DELETE http://localhost:18080/api/boards/111111111
+GET http://localhost:18080/api/boards/9999
 
 ### 에러 처리: 입력값 검증 실패는 400 + fieldErrors
 POST http://localhost:18080/api/boards
 Content-Type: application/json
 
 {}
-
-### 에러 처리: query parameter 타입 변환 실패는 400
-GET http://localhost:18080/api/boards?cursorId=abc&size=2
-
-### Swagger/OpenAPI JSON 확인
-GET http://localhost:18080/v3/api-docs
