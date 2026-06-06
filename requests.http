@@ -23,7 +23,7 @@ GET http://localhost:18080/api/boards/1
 ### JPA: Dirty Checking 제목 수정
 PATCH http://localhost:18080/api/boards/1/title
 Content-Type: application/json
-c
+
 {
   "title": "JPA Dirty Checking 시연"
 }
