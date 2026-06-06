@@ -239,7 +239,7 @@ select distinct b1_0.id,c1_0.board_id,c1_0.id,c1_0.content,c1_0.created_at,c1_0.
 
 3.
 Dirty checking 케이스
-
+ 
 select b1_0.id,b1_0.content,b1_0.created_at,b1_0.title,b1_0.views,b1_0.writer from board b1_0 where b1_0.id=?
 select b1_0.id,b1_0.content,b1_0.created_at,b1_0.title,b1_0.views,b1_0.writer from board b1_0 where b1_0.id=1;
 2026-06-06T08:57:32.608+09:00  INFO 38684 --- [week7-board-jpa] [io-18080-exec-3] p6spy                                    : #1780703852608 | took 10ms | statement | connection 2| url jdbc:mariadb://localhost/week5_board?user=root&password=***
